@@ -1,77 +1,14 @@
-{
-  "parserOptions": {
-  "ecmaVersion": 9,
-  "sourceType": "module"
-  },
-  "env": {
-  "es6": true,
-  "node": true,
-  "jest": true
-  },
-  "extends": [
-  "eslint:recommended"
-  ],
-  "rules": {
-  "no-console": "warn",
-  "indent": [
-  "error",
-  2,
-  {
-  "SwitchCase": 1
-  }
-  ],
-  "quotes": [
-  "error",
-  "single"
-  ],
-  "semi": [
-  "error",
-  "always"
-  ],
-  "space-in-parens": [
-  "error"
-  ],
-  "space-infix-ops": "error",
-  "object-curly-spacing": [
-  "error",
-  "always"
-  ],
-  "comma-spacing": "error",
-  "space-before-function-paren": [
-  "error",
-  "never"
-  ],
-  "eol-last": [
-  "error",
-  "always"
-  ],
-  "keyword-spacing": [
-  "error",
-  {
-  "before": true,
-  "after": true,
-  "overrides": {
-  "do": {
-  "after": false
-  },
-  "for": {
-  "after": false
-  },
-  "if": {
-  "after": false
-  },
-  "switch": {
-  "after": false
-  },
-  "while": {
-  "after": false
-  },
-  "catch": {
-  "after": false
-  }
-  }
-  }
-  ],
-  "array-bracket-spacing": "error"
-  }
-  }
+const fs = require('fs');
+const BitmapTransformer = require('./lib/bitmap-transformer');
+const transform = require('./lib/sepia-transformer');
+
+const fileName = './julia_set.bmp';
+
+const buffer = fs.readFileSync(fileName);
+
+const bitmap = new BitmapTransformer(buffer);
+
+bitmap.transform(transform, err => {
+  fs.writeFileSync('./transformed.bmp', bitmap.buffer);
+  console.log('done!');
+});
