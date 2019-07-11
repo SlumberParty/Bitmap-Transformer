@@ -1,5 +1,5 @@
 const invert = require('../lib/invert-transformer');
-const grayscale = require('../lib/grayscale-transformer');
+const grayscale = require('../lib/greyscale-transformer');
 const sepia = require('../lib/sepia-transformer.js');
 
 describe('transformers', () => {
